@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent cost kill-switch · Houghton Labs</title>
+  <meta name="description" content="A middleware replay: loop depth, repeated tool calls, and projected spend. Soft budget steps the model down. Hard budget opens the breaker.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2312110e' width='32' height='32'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia' font-size='14' fill='%23e3925b'%3EHL%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">HL</span>
+        <div>
+          <p class="org">Houghton Labs</p>
+          <h1>Agent cost kill-switch</h1>
+        </div>
+      </div>
+      <p class="lede">Middleware in front of an agent loop. It meters depth, repeated tool calls, tokens, and projected spend, then steps the model down or opens the breaker.</p>
+      <ul class="pills">
+        <li>Example prices</li>
+        <li id="cap-pill">Hard cap $0.50</li>
+        <li id="mode-pill">Recorded run</li>
+      </ul>
+    </header>
+
+    <div class="layout">
+      <nav class="scenarios" aria-label="Scenarios">
+        <p class="nav-label">Scenarios</p>
+        <div id="scenario-list"></div>
+      </nav>
+
+      <main>
+        <section class="task" id="task">
+          <p class="kicker" id="task-kicker">Task</p>
+          <h2 id="task-title">Loading recorded runs</h2>
+          <p id="task-summary"></p>
+          <blockquote id="task-instruction"></blockquote>
+        </section>
+
+        <section class="instruments" aria-label="Loop instruments">
+          <article class="panel">
+            <header class="panel-head">
+              <p class="kicker">Spend</p>
+              <p class="hint">example USD</p>
+            </header>
+            <svg id="gauge" viewBox="0 0 340 208" role="img" aria-labelledby="gauge-title">
+              <title id="gauge-title">Spend and projected spend against the hard budget</title>
+            </svg>
+            <p class="hero-num"><span id="spent-value">$0.0000</span> <span class="unit">spent</span></p>
+            <p class="subline">
+              <span id="proj-value">projected $0.0000</span>
+              <span class="dot" aria-hidden="true">·</span>
+              <span id="next-call">next call</span>
+            </p>
+          </article>
+
+          <article class="panel">
+            <header class="panel-head">
+              <p class="kicker">Loop</p>
+              <p class="hint" id="depth-hint">depth</p>
+            </header>
+            <div id="lamps" class="lamps"></div>
+            <p class="hero-num"><span id="depth-value">0</span> <span class="unit" id="depth-unit">/ 6</span></p>
+            <p class="subline" id="repeat-line">identical calls 0 / 3</p>
+          </article>
+
+          <article class="panel">
+            <header class="panel-head">
+              <p class="kicker">Model tier</p>
+              <p class="hint">expensive → cheap</p>
+            </header>
+            <div id="tiers" class="tiers"></div>
+            <p id="tier-blurb" class="subline"></p>
+          </article>
+        </section>
+
+        <section id="banner" class="banner" data-tone="running" aria-live="polite"></section>
+
+        <section class="split">
+          <div>
+            <header class="panel-head">
+              <p class="kicker">Trace</p>
+              <p class="hint" id="frame-label">0 / 0</p>
+            </header>
+            <ol id="trace" class="trace"></ol>
+          </div>
+          <div>
+            <header class="panel-head">
+              <p class="kicker">Cost ledger</p>
+              <p class="hint">per model call</p>
+            </header>
+            <p id="answer" class="answer" hidden></p>
+            <div class="table-wrap">
+              <table id="ledger">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Tier</th>
+                    <th>In</th>
+                    <th>Out</th>
+                    <th>Turn</th>
+                    <th>Total</th>
+                    <th>Decision</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <div class="controls">
+          <button type="button" id="replay">Replay</button>
+          <label class="scrub-label">
+            <span class="sr">Frame</span>
+            <input id="scrub" type="range" min="0" max="0" value="0" step="1">
+          </label>
+          <button type="button" id="live" class="live" hidden>Run live</button>
+          <p class="caption" id="caption">Playing a recorded run. This page does not call a model.</p>
+        </div>
+      </main>
+    </div>
+
+    <footer class="colophon">
+      <p>Prices on this page are example configuration values shipped in <code>configs/prices.yaml</code>. They are not quotes, not measurements, and not invoices. Local electricity is not in the table. Token counts are a deterministic character estimate, not a provider tokenizer.</p>
+      <p>Static replay for Cloudflare Pages. Nothing here is a live model call unless you started <code>make run</code> and press Run live.</p>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

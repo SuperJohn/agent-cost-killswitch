@@ -1,0 +1,76 @@
+{
+  "synthetic": true,
+  "note": "Synthetic tool fixtures for the kill-switch demo. No customer data.",
+  "tools": {
+    "list_tickets": {
+      "description": "List synthetic facilities tickets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string"},
+          "queue": {"type": "string"}
+        },
+        "required": ["status", "queue"],
+        "additionalProperties": false
+      },
+      "result_mode": "json",
+      "result": {
+        "tickets": [
+          {
+            "id": "FAC-1842",
+            "queue": "FAC",
+            "status": "open",
+            "summary": "HVAC filter overdue, building C"
+          },
+          {
+            "id": "FAC-1848",
+            "queue": "FAC",
+            "status": "open",
+            "summary": "Loading dock door sensor intermittent"
+          },
+          {
+            "id": "FAC-1851",
+            "queue": "FAC",
+            "status": "open",
+            "summary": "East stairwell light out"
+          }
+        ]
+      }
+    },
+    "search_inventory": {
+      "description": "Look up a synthetic SKU in a warehouse.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sku": {"type": "string"},
+          "warehouse": {"type": "string"}
+        },
+        "required": ["sku", "warehouse"],
+        "additionalProperties": false
+      },
+      "result_mode": "json",
+      "result": {
+        "sku": "HX-204",
+        "warehouse": "south",
+        "found": false,
+        "on_hand": 0,
+        "note": "No matching pallet in the synthetic catalog."
+      }
+    },
+    "query_usage": {
+      "description": "Return a synthetic API usage dump for a demo account.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account": {"type": "string"},
+          "window": {"type": "string"}
+        },
+        "required": ["account", "window"],
+        "additionalProperties": false
+      },
+      "result_mode": "token_target",
+      "default_token_target": 128,
+      "result": null
+    }
+  }
+}

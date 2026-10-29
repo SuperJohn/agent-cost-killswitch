@@ -1,0 +1,73 @@
+{
+  "product": "agent-cost-killswitch",
+  "price_label": "example",
+  "disclaimer": "Every dollar figure in this file is an example configuration value for the demo. It is not a quote from any model provider and not a claim about what a task will cost. Local electricity and hardware are not priced.",
+  "note": "Spent and projected figures use configs/prices.yaml. They are example configuration values, not invoices.",
+  "generated_at": "2026-10-29T15:00:00Z",
+  "scenarios": [
+    {
+      "id": "normal",
+      "title": "Normal task",
+      "status": "completed",
+      "halt_code": null,
+      "depth": 2,
+      "final_tier": "frontier",
+      "spent_usd": "0.007425",
+      "projected_usd": "0.013050",
+      "prompt_tokens": 235,
+      "completion_tokens": 65,
+      "model_calls": 2,
+      "tool_executions": 1,
+      "overshoot": false,
+      "what": "A short facilities note finishes on the frontier tier, under the soft budget."
+    },
+    {
+      "id": "runaway-loop",
+      "title": "Runaway loop",
+      "status": "halted",
+      "halt_code": "repeated_tool_call",
+      "depth": 3,
+      "final_tier": "frontier",
+      "spent_usd": "0.007245",
+      "projected_usd": "0.010290",
+      "prompt_tokens": 327,
+      "completion_tokens": 39,
+      "model_calls": 3,
+      "tool_executions": 2,
+      "overshoot": false,
+      "what": "The model calls search_inventory with the same arguments until the repeat limit opens the breaker."
+    },
+    {
+      "id": "budget-overrun",
+      "title": "Budget overrun",
+      "status": "halted",
+      "halt_code": "hard_budget",
+      "depth": 1,
+      "final_tier": "mid",
+      "spent_usd": "0.121470",
+      "projected_usd": "0.662020",
+      "prompt_tokens": 8050,
+      "completion_tokens": 12,
+      "model_calls": 1,
+      "tool_executions": 1,
+      "overshoot": false,
+      "what": "A synthetic usage dump lands in the prompt. The next call is projected over the $0.50 hard cap and is not sent."
+    },
+    {
+      "id": "provider-outage",
+      "title": "Provider outage",
+      "status": "completed",
+      "halt_code": null,
+      "depth": 2,
+      "final_tier": "local",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.000000",
+      "prompt_tokens": 255,
+      "completion_tokens": 77,
+      "model_calls": 2,
+      "tool_executions": 1,
+      "overshoot": false,
+      "what": "The frontier provider returns HTTP 503. The task finishes on the local tier."
+    }
+  ]
+}
