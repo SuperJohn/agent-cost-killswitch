@@ -1,0 +1,438 @@
+{
+  "id": "provider-outage",
+  "title": "Provider outage",
+  "summary": "The frontier provider returns HTTP 503. The task finishes on the local tier.",
+  "instruction": "Write a one-paragraph status note for the open facilities tickets in queue FAC. A local model is acceptable if the frontier provider is down.",
+  "synthetic": true,
+  "price_label": "example",
+  "price_disclaimer": "Every dollar figure in this file is an example configuration value for the demo. It is not a quote from any model provider and not a claim about what a task will cost. Local electricity and hardware are not priced.",
+  "generated_at": "2026-10-29T15:00:00Z",
+  "status": "completed",
+  "halt_code": null,
+  "halt_message": null,
+  "overshoot": false,
+  "depth": 2,
+  "final_tier": "local",
+  "spent_usd": "0.000000",
+  "projected_usd": "0.000000",
+  "soft_budget_usd": "0.100000",
+  "hard_budget_usd": "0.500000",
+  "max_loop_depth": 6,
+  "max_identical_tool_repeats": 3,
+  "prompt_tokens": 255,
+  "completion_tokens": 77,
+  "model_calls": 2,
+  "tool_executions": 1,
+  "final_text": "Local model note. Open FAC tickets: FAC-1842 HVAC filter overdue in building C, FAC-1848 dock door sensor intermittent, FAC-1851 east stairwell light out. Filter parts are waiting, a sensor reset is scheduled, and a lamp is on the dock. These ids are synthetic.",
+  "snapshots": [
+    {
+      "index": 0,
+      "kind": "start",
+      "kicker": "TASK",
+      "title": "Task accepted",
+      "detail": "Write a one-paragraph status note for the open facilities tickets in queue FAC. A local model is acceptable if the frontier provider is down.",
+      "status": "running",
+      "depth": 0,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.016650",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 86,
+      "completion_tokens_est": 256,
+      "repeat_limit": 3,
+      "repeat_count": 0,
+      "repeat_label": null,
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": []
+    },
+    {
+      "index": 1,
+      "kind": "outage",
+      "kicker": "OUTAGE",
+      "title": "frontier unreachable",
+      "detail": "example frontier provider returned HTTP 503",
+      "status": "running",
+      "depth": 0,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.016650",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 86,
+      "completion_tokens_est": 256,
+      "repeat_limit": 3,
+      "repeat_count": 0,
+      "repeat_label": null,
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "failed"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": []
+    },
+    {
+      "index": 2,
+      "kind": "fallback",
+      "kicker": "FALLBACK",
+      "title": "Fell back to Local",
+      "detail": "Outage on frontier. The next call uses local (llama-local-example), skipping any hosted tier in between. Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+      "status": "running",
+      "depth": 0,
+      "max_depth": 6,
+      "tier": "local",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.000000",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 86,
+      "completion_tokens_est": 256,
+      "repeat_limit": 3,
+      "repeat_count": 0,
+      "repeat_label": null,
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "failed"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "active"
+        }
+      ],
+      "rows": []
+    },
+    {
+      "index": 3,
+      "kind": "turn",
+      "kicker": "TURN",
+      "title": "Model call 1",
+      "detail": "Local (llama-local-example) billed 86 prompt tokens and 11 completion tokens. Turn cost 0.000000 USD, cumulative 0.000000 USD. Decision: run tools. Calls: list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}.",
+      "status": "running",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "local",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.000000",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 86,
+      "completion_tokens_est": 11,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "failed"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "active"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "local",
+          "model_id": "llama-local-example",
+          "prompt_tokens": 86,
+          "completion_tokens": 11,
+          "cost_usd": "0.000000",
+          "cumulative_usd": "0.000000",
+          "projected_before_usd": "0.000000",
+          "tool_calls": [
+            "list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}"
+          ],
+          "decision": "run tools"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "kind": "tool",
+      "kicker": "TOOL",
+      "title": "list_tickets",
+      "detail": "list_tickets \u2192 {\"tickets\":[{\"id\":\"FAC-1842\",\"queue\":\"FAC\",\"status\":\"open\",\"summary\":\"HVAC filter overdue, building C\"},{\"id\":\"FAC-1848\",\"queue\":\"FAC\",\"status\":\"open\",\"summary\":\"Loading dock door sensor intermittent\"},{\"id\":\"FAC-1851\",\"queue\":\"FAC\",\"status\":\"open\",\"summary\":\"East stairwell light out\"}]}",
+      "status": "running",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "local",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.000000",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 169,
+      "completion_tokens_est": 11,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "failed"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "active"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "local",
+          "model_id": "llama-local-example",
+          "prompt_tokens": 86,
+          "completion_tokens": 11,
+          "cost_usd": "0.000000",
+          "cumulative_usd": "0.000000",
+          "projected_before_usd": "0.000000",
+          "tool_calls": [
+            "list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}"
+          ],
+          "decision": "run tools"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "kind": "complete",
+      "kicker": "DONE",
+      "title": "Task finished",
+      "detail": "The model returned an answer and no tool call. The loop stopped.",
+      "status": "completed",
+      "depth": 2,
+      "max_depth": 6,
+      "tier": "local",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.000000",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 169,
+      "completion_tokens_est": 66,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": "Local model note. Open FAC tickets: FAC-1842 HVAC filter overdue in building C, FAC-1848 dock door sensor intermittent, FAC-1851 east stairwell light out. Filter parts are waiting, a sensor reset is scheduled, and a lamp is on the dock. These ids are synthetic.",
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "failed"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "active"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "local",
+          "model_id": "llama-local-example",
+          "prompt_tokens": 86,
+          "completion_tokens": 11,
+          "cost_usd": "0.000000",
+          "cumulative_usd": "0.000000",
+          "projected_before_usd": "0.000000",
+          "tool_calls": [
+            "list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}"
+          ],
+          "decision": "run tools"
+        },
+        {
+          "depth": 2,
+          "tier": "local",
+          "model_id": "llama-local-example",
+          "prompt_tokens": 169,
+          "completion_tokens": 66,
+          "cost_usd": "0.000000",
+          "cumulative_usd": "0.000000",
+          "projected_before_usd": "0.000000",
+          "tool_calls": [],
+          "decision": "final answer"
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "depth": 1,
+      "tier": "local",
+      "model_id": "llama-local-example",
+      "prompt_tokens": 86,
+      "completion_tokens": 11,
+      "cost_usd": "0.000000",
+      "cumulative_usd": "0.000000",
+      "projected_before_usd": "0.000000",
+      "tool_calls": [
+        "list_tickets:{\"queue\":\"FAC\",\"status\":\"open\"}"
+      ],
+      "decision": "run tools"
+    },
+    {
+      "depth": 2,
+      "tier": "local",
+      "model_id": "llama-local-example",
+      "prompt_tokens": 169,
+      "completion_tokens": 66,
+      "cost_usd": "0.000000",
+      "cumulative_usd": "0.000000",
+      "projected_before_usd": "0.000000",
+      "tool_calls": [],
+      "decision": "final answer"
+    }
+  ]
+}

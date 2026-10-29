@@ -1,0 +1,14 @@
+# Demo policy. The hard cap of $0.50 per task is the default this repo ships.
+# Raise it here if you point the price table at a real contract. A soft budget
+# of 0 steps down after the first billed call.
+version: 1
+hard_budget_usd: "0.50"
+soft_budget_usd: "0.10"
+max_loop_depth: 6
+max_identical_tool_repeats: 3
+planning_completion_tokens: 256
+local_tier: local
+tiers:
+  - frontier
+  - mid
+  - local

@@ -1,0 +1,375 @@
+{
+  "id": "budget-overrun",
+  "title": "Budget overrun",
+  "summary": "A synthetic usage dump lands in the prompt. The next call is projected over the $0.50 hard cap and is not sent.",
+  "instruction": "Summarize 30 days of API usage for synthetic account acct-14 and recommend a monthly cap.",
+  "synthetic": true,
+  "price_label": "example",
+  "price_disclaimer": "Every dollar figure in this file is an example configuration value for the demo. It is not a quote from any model provider and not a claim about what a task will cost. Local electricity and hardware are not priced.",
+  "generated_at": "2026-10-29T15:00:00Z",
+  "status": "halted",
+  "halt_code": "hard_budget",
+  "halt_message": "Projected spend 0.662020 USD would exceed the hard budget 0.500000 USD on tier mid (mid-example). The next call was not sent.",
+  "overshoot": false,
+  "depth": 1,
+  "final_tier": "mid",
+  "spent_usd": "0.121470",
+  "projected_usd": "0.662020",
+  "soft_budget_usd": "0.100000",
+  "hard_budget_usd": "0.500000",
+  "max_loop_depth": 6,
+  "max_identical_tool_repeats": 3,
+  "prompt_tokens": 8050,
+  "completion_tokens": 12,
+  "model_calls": 1,
+  "tool_executions": 1,
+  "final_text": null,
+  "snapshots": [
+    {
+      "index": 0,
+      "kind": "start",
+      "kicker": "TASK",
+      "title": "Task accepted",
+      "detail": "Summarize 30 days of API usage for synthetic account acct-14 and recommend a monthly cap.",
+      "status": "running",
+      "depth": 0,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.136110",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 8050,
+      "completion_tokens_est": 256,
+      "repeat_limit": 3,
+      "repeat_count": 0,
+      "repeat_label": null,
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": []
+    },
+    {
+      "index": 1,
+      "kind": "turn",
+      "kicker": "TURN",
+      "title": "Model call 1",
+      "detail": "Frontier (frontier-example) billed 8050 prompt tokens and 12 completion tokens. Turn cost 0.121470 USD, cumulative 0.121470 USD. Decision: step down to mid. Calls: query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}.",
+      "status": "running",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.121470",
+      "projected_usd": "0.242940",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 8050,
+      "completion_tokens_est": 12,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 8050,
+          "completion_tokens": 12,
+          "cost_usd": "0.121470",
+          "cumulative_usd": "0.121470",
+          "projected_before_usd": "0.136110",
+          "tool_calls": [
+            "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}"
+          ],
+          "decision": "step down to mid"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "kind": "downgrade",
+      "kicker": "STEP DOWN",
+      "title": "frontier \u2192 mid",
+      "detail": "Soft budget 0.100000 USD reached at 0.121470 USD. The next model call uses mid (mid-example) instead of frontier.",
+      "status": "running",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "mid",
+      "spent_usd": "0.121470",
+      "projected_usd": "0.161960",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 8050,
+      "completion_tokens_est": 12,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "stood_down"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "active"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 8050,
+          "completion_tokens": 12,
+          "cost_usd": "0.121470",
+          "cumulative_usd": "0.121470",
+          "projected_before_usd": "0.136110",
+          "tool_calls": [
+            "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}"
+          ],
+          "decision": "step down to mid"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "kind": "tool",
+      "kicker": "TOOL",
+      "title": "query_usage",
+      "detail": "query_usage returned 100000 tokens of synthetic data. Those tokens are now part of the next prompt.",
+      "status": "running",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "mid",
+      "spent_usd": "0.121470",
+      "projected_usd": "0.662020",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 108062,
+      "completion_tokens_est": 12,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "stood_down"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "active"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 8050,
+          "completion_tokens": 12,
+          "cost_usd": "0.121470",
+          "cumulative_usd": "0.121470",
+          "projected_before_usd": "0.136110",
+          "tool_calls": [
+            "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}"
+          ],
+          "decision": "step down to mid"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "kind": "halt",
+      "kicker": "HALT",
+      "title": "Hard budget",
+      "detail": "Projected spend 0.662020 USD would exceed the hard budget 0.500000 USD on tier mid (mid-example). The next call was not sent.",
+      "status": "halted",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "mid",
+      "spent_usd": "0.121470",
+      "projected_usd": "0.662020",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 108062,
+      "completion_tokens_est": 12,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}",
+      "halt_code": "hard_budget",
+      "halt_message": "Projected spend 0.662020 USD would exceed the hard budget 0.500000 USD on tier mid (mid-example). The next call was not sent.",
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "stood_down"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "active"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 8050,
+          "completion_tokens": 12,
+          "cost_usd": "0.121470",
+          "cumulative_usd": "0.121470",
+          "projected_before_usd": "0.136110",
+          "tool_calls": [
+            "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}"
+          ],
+          "decision": "step down to mid"
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "depth": 1,
+      "tier": "frontier",
+      "model_id": "frontier-example",
+      "prompt_tokens": 8050,
+      "completion_tokens": 12,
+      "cost_usd": "0.121470",
+      "cumulative_usd": "0.121470",
+      "projected_before_usd": "0.136110",
+      "tool_calls": [
+        "query_usage:{\"account\":\"acct-14\",\"window\":\"30d\"}"
+      ],
+      "decision": "step down to mid"
+    }
+  ]
+}

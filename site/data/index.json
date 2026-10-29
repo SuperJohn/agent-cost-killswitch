@@ -1,0 +1,43 @@
+{
+  "product": "agent-cost-killswitch",
+  "org": "Houghton Labs",
+  "price_label": "example",
+  "price_disclaimer": "Every dollar figure in this file is an example configuration value for the demo. It is not a quote from any model provider and not a claim about what a task will cost. Local electricity and hardware are not priced.",
+  "hard_budget_usd": "0.500000",
+  "soft_budget_usd": "0.100000",
+  "generated_at": "2026-10-29T15:00:00Z",
+  "scenarios": [
+    {
+      "id": "normal",
+      "title": "Normal task",
+      "summary": "A short facilities note finishes on the frontier tier, under the soft budget.",
+      "file": "normal.json",
+      "status": "completed",
+      "halt_code": null
+    },
+    {
+      "id": "runaway-loop",
+      "title": "Runaway loop",
+      "summary": "The model calls search_inventory with the same arguments until the repeat limit opens the breaker.",
+      "file": "runaway-loop.json",
+      "status": "halted",
+      "halt_code": "repeated_tool_call"
+    },
+    {
+      "id": "budget-overrun",
+      "title": "Budget overrun",
+      "summary": "A synthetic usage dump lands in the prompt. The next call is projected over the $0.50 hard cap and is not sent.",
+      "file": "budget-overrun.json",
+      "status": "halted",
+      "halt_code": "hard_budget"
+    },
+    {
+      "id": "provider-outage",
+      "title": "Provider outage",
+      "summary": "The frontier provider returns HTTP 503. The task finishes on the local tier.",
+      "file": "provider-outage.json",
+      "status": "completed",
+      "halt_code": null
+    }
+  ]
+}

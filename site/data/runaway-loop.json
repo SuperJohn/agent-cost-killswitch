@@ -1,0 +1,625 @@
+{
+  "id": "runaway-loop",
+  "title": "Runaway loop",
+  "summary": "The model calls search_inventory with the same arguments until the repeat limit opens the breaker.",
+  "instruction": "Find the on-hand count for SKU HX-204 at warehouse south, then stop.",
+  "synthetic": true,
+  "price_label": "example",
+  "price_disclaimer": "Every dollar figure in this file is an example configuration value for the demo. It is not a quote from any model provider and not a claim about what a task will cost. Local electricity and hardware are not priced.",
+  "generated_at": "2026-10-29T15:00:00Z",
+  "status": "halted",
+  "halt_code": "repeated_tool_call",
+  "halt_message": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"} was returned 3 times. The limit is 3. That call was not executed.",
+  "overshoot": false,
+  "depth": 3,
+  "final_tier": "frontier",
+  "spent_usd": "0.007245",
+  "projected_usd": "0.010290",
+  "soft_budget_usd": "0.100000",
+  "hard_budget_usd": "0.500000",
+  "max_loop_depth": 6,
+  "max_identical_tool_repeats": 3,
+  "prompt_tokens": 327,
+  "completion_tokens": 39,
+  "model_calls": 3,
+  "tool_executions": 2,
+  "final_text": null,
+  "snapshots": [
+    {
+      "index": 0,
+      "kind": "start",
+      "kicker": "TASK",
+      "title": "Task accepted",
+      "detail": "Find the on-hand count for SKU HX-204 at warehouse south, then stop.",
+      "status": "running",
+      "depth": 0,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.000000",
+      "projected_usd": "0.016365",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 67,
+      "completion_tokens_est": 256,
+      "repeat_limit": 3,
+      "repeat_count": 0,
+      "repeat_label": null,
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": []
+    },
+    {
+      "index": 1,
+      "kind": "turn",
+      "kicker": "TURN",
+      "title": "Model call 1",
+      "detail": "Frontier (frontier-example) billed 67 prompt tokens and 13 completion tokens. Turn cost 0.001785 USD, cumulative 0.001785 USD. Decision: run tools. Calls: search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}.",
+      "status": "running",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.001785",
+      "projected_usd": "0.003570",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 67,
+      "completion_tokens_est": 13,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 67,
+          "completion_tokens": 13,
+          "cost_usd": "0.001785",
+          "cumulative_usd": "0.001785",
+          "projected_before_usd": "0.016365",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "kind": "tool",
+      "kicker": "TOOL",
+      "title": "search_inventory",
+      "detail": "search_inventory \u2192 {\"found\":false,\"note\":\"No matching pallet in the synthetic catalog.\",\"on_hand\":0,\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "status": "running",
+      "depth": 1,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.001785",
+      "projected_usd": "0.004200",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 109,
+      "completion_tokens_est": 13,
+      "repeat_limit": 3,
+      "repeat_count": 1,
+      "repeat_label": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 67,
+          "completion_tokens": 13,
+          "cost_usd": "0.001785",
+          "cumulative_usd": "0.001785",
+          "projected_before_usd": "0.016365",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "kind": "turn",
+      "kicker": "TURN",
+      "title": "Model call 2",
+      "detail": "Frontier (frontier-example) billed 109 prompt tokens and 13 completion tokens. Turn cost 0.002415 USD, cumulative 0.004200 USD. Decision: run tools. Calls: search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}.",
+      "status": "running",
+      "depth": 2,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.004200",
+      "projected_usd": "0.006615",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 109,
+      "completion_tokens_est": 13,
+      "repeat_limit": 3,
+      "repeat_count": 2,
+      "repeat_label": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 67,
+          "completion_tokens": 13,
+          "cost_usd": "0.001785",
+          "cumulative_usd": "0.001785",
+          "projected_before_usd": "0.016365",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        },
+        {
+          "depth": 2,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 109,
+          "completion_tokens": 13,
+          "cost_usd": "0.002415",
+          "cumulative_usd": "0.004200",
+          "projected_before_usd": "0.004200",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "kind": "tool",
+      "kicker": "TOOL",
+      "title": "search_inventory",
+      "detail": "search_inventory \u2192 {\"found\":false,\"note\":\"No matching pallet in the synthetic catalog.\",\"on_hand\":0,\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "status": "running",
+      "depth": 2,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.004200",
+      "projected_usd": "0.007245",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 151,
+      "completion_tokens_est": 13,
+      "repeat_limit": 3,
+      "repeat_count": 2,
+      "repeat_label": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 67,
+          "completion_tokens": 13,
+          "cost_usd": "0.001785",
+          "cumulative_usd": "0.001785",
+          "projected_before_usd": "0.016365",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        },
+        {
+          "depth": 2,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 109,
+          "completion_tokens": 13,
+          "cost_usd": "0.002415",
+          "cumulative_usd": "0.004200",
+          "projected_before_usd": "0.004200",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "kind": "turn",
+      "kicker": "TURN",
+      "title": "Model call 3",
+      "detail": "Frontier (frontier-example) billed 151 prompt tokens and 13 completion tokens. Turn cost 0.003045 USD, cumulative 0.007245 USD. Decision: halt: repeated_tool_call. Calls: search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}.",
+      "status": "running",
+      "depth": 3,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.007245",
+      "projected_usd": "0.010290",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 151,
+      "completion_tokens_est": 13,
+      "repeat_limit": 3,
+      "repeat_count": 3,
+      "repeat_label": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "halt_code": null,
+      "halt_message": null,
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 67,
+          "completion_tokens": 13,
+          "cost_usd": "0.001785",
+          "cumulative_usd": "0.001785",
+          "projected_before_usd": "0.016365",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        },
+        {
+          "depth": 2,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 109,
+          "completion_tokens": 13,
+          "cost_usd": "0.002415",
+          "cumulative_usd": "0.004200",
+          "projected_before_usd": "0.004200",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        },
+        {
+          "depth": 3,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 151,
+          "completion_tokens": 13,
+          "cost_usd": "0.003045",
+          "cumulative_usd": "0.007245",
+          "projected_before_usd": "0.007245",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "halt: repeated_tool_call"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "kind": "halt",
+      "kicker": "HALT",
+      "title": "Repeated tool call",
+      "detail": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"} was returned 3 times. The limit is 3. That call was not executed.",
+      "status": "halted",
+      "depth": 3,
+      "max_depth": 6,
+      "tier": "frontier",
+      "spent_usd": "0.007245",
+      "projected_usd": "0.010290",
+      "soft_budget_usd": "0.100000",
+      "hard_budget_usd": "0.500000",
+      "prompt_tokens_next": 151,
+      "completion_tokens_est": 13,
+      "repeat_limit": 3,
+      "repeat_count": 3,
+      "repeat_label": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}",
+      "halt_code": "repeated_tool_call",
+      "halt_message": "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"} was returned 3 times. The limit is 3. That call was not executed.",
+      "overshoot": false,
+      "final_text": null,
+      "tiers": [
+        {
+          "tier": "frontier",
+          "display_name": "Frontier",
+          "model_id": "frontier-example",
+          "input_per_million_usd": "15.000000",
+          "output_per_million_usd": "60.000000",
+          "blurb": "Example stand-in for a frontier API model.",
+          "state": "active"
+        },
+        {
+          "tier": "mid",
+          "display_name": "Mid",
+          "model_id": "mid-example",
+          "input_per_million_usd": "5.000000",
+          "output_per_million_usd": "20.000000",
+          "blurb": "Example stand-in for a cheaper hosted model.",
+          "state": "idle"
+        },
+        {
+          "tier": "local",
+          "display_name": "Local",
+          "model_id": "llama-local-example",
+          "input_per_million_usd": "0.000000",
+          "output_per_million_usd": "0.000000",
+          "blurb": "Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.",
+          "state": "idle"
+        }
+      ],
+      "rows": [
+        {
+          "depth": 1,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 67,
+          "completion_tokens": 13,
+          "cost_usd": "0.001785",
+          "cumulative_usd": "0.001785",
+          "projected_before_usd": "0.016365",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        },
+        {
+          "depth": 2,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 109,
+          "completion_tokens": 13,
+          "cost_usd": "0.002415",
+          "cumulative_usd": "0.004200",
+          "projected_before_usd": "0.004200",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "run tools"
+        },
+        {
+          "depth": 3,
+          "tier": "frontier",
+          "model_id": "frontier-example",
+          "prompt_tokens": 151,
+          "completion_tokens": 13,
+          "cost_usd": "0.003045",
+          "cumulative_usd": "0.007245",
+          "projected_before_usd": "0.007245",
+          "tool_calls": [
+            "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+          ],
+          "decision": "halt: repeated_tool_call"
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "depth": 1,
+      "tier": "frontier",
+      "model_id": "frontier-example",
+      "prompt_tokens": 67,
+      "completion_tokens": 13,
+      "cost_usd": "0.001785",
+      "cumulative_usd": "0.001785",
+      "projected_before_usd": "0.016365",
+      "tool_calls": [
+        "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+      ],
+      "decision": "run tools"
+    },
+    {
+      "depth": 2,
+      "tier": "frontier",
+      "model_id": "frontier-example",
+      "prompt_tokens": 109,
+      "completion_tokens": 13,
+      "cost_usd": "0.002415",
+      "cumulative_usd": "0.004200",
+      "projected_before_usd": "0.004200",
+      "tool_calls": [
+        "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+      ],
+      "decision": "run tools"
+    },
+    {
+      "depth": 3,
+      "tier": "frontier",
+      "model_id": "frontier-example",
+      "prompt_tokens": 151,
+      "completion_tokens": 13,
+      "cost_usd": "0.003045",
+      "cumulative_usd": "0.007245",
+      "projected_before_usd": "0.007245",
+      "tool_calls": [
+        "search_inventory:{\"sku\":\"HX-204\",\"warehouse\":\"south\"}"
+      ],
+      "decision": "halt: repeated_tool_call"
+    }
+  ]
+}

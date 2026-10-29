@@ -1,0 +1,86 @@
+{
+  "dataset": "houghton-labs-killswitch-demo",
+  "synthetic": true,
+  "note": "Synthetic tasks and scripted model traces. No customer data, no secrets.",
+  "scenarios": [
+    {
+      "id": "normal",
+      "title": "Normal task",
+      "summary": "A short facilities note finishes on the frontier tier, under the soft budget.",
+      "instruction": "Write a one-paragraph status note for the open facilities tickets in queue FAC. Use only tool results.",
+      "steps": [
+        {
+          "content": "",
+          "tool_calls": [
+            {"name": "list_tickets", "arguments": {"queue": "FAC", "status": "open"}}
+          ]
+        },
+        {
+          "content": "Three facilities tickets are open in queue FAC. FAC-1842: HVAC filter overdue in building C. FAC-1848: the loading-dock door sensor is intermittent. FAC-1851: the east stairwell light is out. These ids are synthetic.",
+          "tool_calls": []
+        }
+      ]
+    },
+    {
+      "id": "runaway-loop",
+      "title": "Runaway loop",
+      "summary": "The model calls search_inventory with the same arguments until the repeat limit opens the breaker.",
+      "instruction": "Find the on-hand count for SKU HX-204 at warehouse south, then stop.",
+      "steps": [
+        {
+          "tool_calls": [
+            {"name": "search_inventory", "arguments": {"sku": "HX-204", "warehouse": "south"}}
+          ]
+        },
+        {
+          "tool_calls": [
+            {"name": "search_inventory", "arguments": {"sku": "HX-204", "warehouse": "south"}}
+          ]
+        },
+        {
+          "tool_calls": [
+            {"name": "search_inventory", "arguments": {"warehouse": "south", "sku": "HX-204"}}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "budget-overrun",
+      "title": "Budget overrun",
+      "summary": "A synthetic usage dump lands in the prompt. The next call is projected over the $0.50 hard cap and is not sent.",
+      "instruction": "Summarize 30 days of API usage for synthetic account acct-14 and recommend a monthly cap.",
+      "user_token_target": 8000,
+      "tool_overrides": {
+        "query_usage": {"token_target": 100000}
+      },
+      "steps": [
+        {
+          "tool_calls": [
+            {"name": "query_usage", "arguments": {"account": "acct-14", "window": "30d"}}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "provider-outage",
+      "title": "Provider outage",
+      "summary": "The frontier provider returns HTTP 503. The task finishes on the local tier.",
+      "instruction": "Write a one-paragraph status note for the open facilities tickets in queue FAC. A local model is acceptable if the frontier provider is down.",
+      "steps": [
+        {
+          "outage": true,
+          "outage_message": "example frontier provider returned HTTP 503"
+        },
+        {
+          "tool_calls": [
+            {"name": "list_tickets", "arguments": {"queue": "FAC", "status": "open"}}
+          ]
+        },
+        {
+          "content": "Local model note. Open FAC tickets: FAC-1842 HVAC filter overdue in building C, FAC-1848 dock door sensor intermittent, FAC-1851 east stairwell light out. Filter parts are waiting, a sensor reset is scheduled, and a lamp is on the dock. These ids are synthetic.",
+          "tool_calls": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+# EXAMPLE / CONFIG VALUES. Not a quote, not an invoice, not a measurement.
+# Loopguard never fetches live prices. Edit the numbers to match a contract
+# and keep the label as "example" or "config".
+label: example
+disclaimer: >
+  Every dollar figure in this file is an example configuration value for the
+  demo. It is not a quote from any model provider and not a claim about what
+  a task will cost. Local electricity and hardware are not priced.
+tiers:
+  - tier: frontier
+    model_id: frontier-example
+    display_name: Frontier
+    provider: mock
+    input_per_million_usd: "15.00"
+    output_per_million_usd: "60.00"
+    blurb: Example stand-in for a frontier API model.
+  - tier: mid
+    model_id: mid-example
+    display_name: Mid
+    provider: mock
+    input_per_million_usd: "5.00"
+    output_per_million_usd: "20.00"
+    blurb: Example stand-in for a cheaper hosted model.
+  - tier: local
+    model_id: llama-local-example
+    display_name: Local
+    provider: ollama
+    ollama_model: llama3.2
+    input_per_million_usd: "0.00"
+    output_per_million_usd: "0.00"
+    blurb: Example stand-in for an Ollama model on a Mac Studio. The table meters this tier at zero.

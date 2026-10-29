@@ -1,0 +1,6 @@
+# Cloudflare Pages — suggested project name: agent-cost-killswitch
+# Framework preset = None, Build command = (empty),
+# Output / root directory = site, Production branch = main
+name = "agent-cost-killswitch"
+compatibility_date = "2026-10-28"
+pages_build_output_dir = "site"
